@@ -29,25 +29,27 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="ToBuyController as toBuyCtrl">
+    <div class="col-md-6" id="toBuyList" ng-controller="ToBuyController as toBuyList">
      <h2>To Buy:</h2>
      <ul>
-       <li ng-repeat="item in toBuyCtrl.itemsToBuy">
+       <li ng-repeat="item in toBuyList.itemsToBuy">
         Buy {{ item.itemQuantity }} {{ item.itemName }}
-        <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Buy
+        <button class="btn btn-default" ng-click="toBuyList.addItemsToBoughtList(item);">
+          <span class="glyphicon glyphicon-ok"></span> Bought
         </button>
       </li>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div class="emptyMessage" ng-if="toBuyList.errorMessage()==true">Everything is bought</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6" id="boughtDiv" ng-controller="AlreadyBoughtController as AlreadyBoughtController">
+    <div class="col-md-6" id="boughtList" ng-controller="AlreadyBoughtController as boughtList">
      <h2>Already Bought:</h2>
      <ul>
-       <li>Bought 10 cookies</li>
+       <li ng-repeat="item in boughtList.itemsBought">
+         Bought {{item.itemQuantity}} {{item.itemName}}
      </ul>
-        <div ng-if="showList.errorMessage" class="error">{{showList.errorMessage}}</div>
+        <div ng-if="boughtList.errorMessage()==true" class="emptyMessage">Nothing bought yet</div>
     </div>
   </div>
 </div>
